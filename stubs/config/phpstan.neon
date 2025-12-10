@@ -1,0 +1,19 @@
+parameters:
+	reportUnmatchedIgnoredErrors: false
+	treatPhpDocTypesAsCertain: false
+	bootstrapFiles:
+		- ../stubs/functions.php
+parametersSchema:
+	twigstan: structure([
+		twigEnvironmentLoader: string()
+		analysisResultJsonFile: string()
+		mode: string()
+		debugMode: bool()
+	])
+services:
+	errorFormatter.analysisResultToJson:
+		class: TwigStan\PHPStan\AnalysisResultToJson
+		arguments:
+			jsonFile: %twigstan.analysisResultJsonFile%
+			mode: %twigstan.mode%
+			debugMode: %twigstan.debugMode%
